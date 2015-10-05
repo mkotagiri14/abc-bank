@@ -27,16 +27,23 @@ public class Customer {
         return accounts.size();
     }
 
+    // Calculate the total interest earned
     public double totalInterestEarned() {
         double total = 0;
+        // Iterate through accounts, adding the interest from each to the total value
         for (Account a : accounts)
             total += a.interestEarned();
         return total;
     }
+    
+    public void transferBetweenAccounts(Account from, Account to, double amount) {
+    	from.withdraw(amount);
+    	to.deposit(amount);
+    }
 
+    // Return customer statement as string
     public String getStatement() {
-        String statement = null;
-        statement = "Statement for " + name + "\n";
+        String statement = "Statement for " + name + "\n";
         double total = 0.0;
         for (Account a : accounts) {
             statement += "\n" + statementForAccount(a) + "\n";
@@ -49,7 +56,7 @@ public class Customer {
     private String statementForAccount(Account a) {
         String s = "";
 
-       //Translate to pretty account type
+       //Translate to  account type
         switch(a.getAccountType()){
             case Account.CHECKING:
                 s += "Checking Account\n";
